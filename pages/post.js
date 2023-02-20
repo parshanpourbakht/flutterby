@@ -37,7 +37,7 @@ export default function Post(){
         const collectionRef = collection(db, 'posts');
         await addDoc(collectionRef, {
             ...post, 
-            timeStamp: serverTimestamp(),
+            timestamp: serverTimestamp(),
             user: user.uid,
             avatar: user.photoURL,
             username: user.displayName,
