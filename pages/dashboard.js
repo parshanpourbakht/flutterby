@@ -3,10 +3,12 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { db } from '../utils/firebase';
-import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { collection, deleteDoc, doc, onSnapshot, query, where } from 'firebase/firestore';
 import Message from '@/components/message';
 import {BsTrash2Fill} from 'react-icons/bs';
 import {AiFillEdit} from 'react-icons/ai';
+import { async } from '@firebase/util';
+
 
 
 export default function Dashboard() {
@@ -27,6 +29,12 @@ export default function Dashboard() {
         }));
         return unsubscribe;
     };
+
+    //delete post 
+    const deletePost = async (id) => {
+        const docRef = doc(db, 'posts', id);
+        await deleteDoc(docRef);
+    }
     
     //get user data
     useEffect(() => {
@@ -43,7 +51,7 @@ export default function Dashboard() {
                     return(
                         <Message {...post} key={post.id}>
                             <div className='flex gap-4'>
-                                <button className='flex items-center justify-center gap-2 py-2 text-sm'><BsTrash2Fill />Delete</button>
+                                <button onClick={() => deletePost(post.id)} className='flex items-center justify-center gap-2 py-2 text-sm'><BsTrash2Fill />Delete</button>
                                 <button className='flex items-center justify-center gap-2 py-2 text-sm'><AiFillEdit />Edit</button>
                             </div>
                         </Message>
