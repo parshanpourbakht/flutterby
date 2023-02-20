@@ -35,9 +35,8 @@ export default function Home() {
         <h2>What others are saying</h2>
 
 
-        <Message></Message>
         {allPosts.map((post) => (
-          <Message {...post}>
+          <Message key={post.id} {...post}>
 
           </Message>
         ))}
