@@ -19,7 +19,7 @@ export default function Post(){
 
         //run length checks for description of post
         if(!post.description){
-            toast.error('Description field empty 🧐', {
+            toast.error('Empty Description', {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 1500,
             });
@@ -27,7 +27,7 @@ export default function Post(){
         }
 
         if(post.description.length > 300){
-            toast.error('Description too long 🧐', {
+            toast.error('Description too long', {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 1500,
             });
@@ -50,6 +50,10 @@ export default function Post(){
                 username: user.displayName,
             });
             setPost({description: ""});
+            toast.success("Successful Post", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 1500
+            })
             return route.push("/");
     
         }
